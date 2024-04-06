@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express App</title>
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="nav-wrapper">
+            <a href='/'>Home</a>
+            <%if(!user) {%>
+                <a href='/users/signup'>Sign Up</a>
+                <a href='/users/login'>Login</a>
+            <%} else {%>
+                <a href='/users/overview'>Profile</a>
+                <a href='/users/logout'>Logout</a> 
+            <%}%>
+        </div>
+    </nav>
+    
+
+
+
+<div class="container">
+    <h2>Sign Up</h2>
+    <form action="/users" method="POST" class="user-form">
+        <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" class="form-control" required>
+        </div>
+        <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" class="form-control" required>
+        </div>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" minlength="8" required>
+    </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
