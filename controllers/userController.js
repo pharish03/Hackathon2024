@@ -1,9 +1,6 @@
 const model = require('../models/user');
 
-// controller.js
-
 exports.new = (req, res) => {
-    // Render the signup page directly
     return res.render('user/signup');
 };
 
@@ -27,7 +24,6 @@ exports.create = (req, res, next) => {
 };
 
 exports.getUserLogin = (req, res) => {
-    // Render the login page directly
     return res.render('user/login');
 };
 
@@ -46,7 +42,7 @@ exports.login = (req, res, next) => {
                         if (result) {
                             req.session.user = user._id;
                             req.flash('success', 'You have successfully logged in');
-                            return res.redirect('/users/overview');
+                            return res.redirect('/users/overview'); // Update redirection URL here
                         } else {
                             req.flash('error', 'Wrong email address or password');
                             return res.redirect('/users/login');
@@ -55,4 +51,26 @@ exports.login = (req, res, next) => {
             }
         })
         .catch(err => next(err));
+};
+
+
+
+exports.profile = (req, res, next) => {
+    let id = req.session.user;
+    Promise.all([model.findById(id)])
+    .then(results => {
+        const [user] = results;
+        res.render('./user/overview', { user: user }); 
+    })
+    .catch(err => next(err));
+};
+
+
+exports.logout = (req, res, next)=>{
+    req.session.destroy(err=>{
+        if(err) 
+            return next(err);
+        else
+            res.redirect('/');  
+    });
 };
