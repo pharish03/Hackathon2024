@@ -1,4 +1,5 @@
 const model = require("../models/user");
+const SavingsTransaction = require('../models/user');
 
 exports.new = (req, res) => {
   return res.render("user/signup");
@@ -43,7 +44,7 @@ exports.login = (req, res, next) => {
           if (result) {
             req.session.user = user._id;
             req.flash("success", "You have successfully logged in");
-            return res.redirect("/users/overview"); // Update redirection URL here
+            return res.redirect("/users/overview");
           } else {
             req.flash("error", "Wrong email address or password");
             return res.redirect("/users/login");
@@ -58,6 +59,7 @@ exports.profile = (req, res, next) => {
   let id = req.session.user;
   model
     .findById(id)
+    .populate('savingsTransactions')
     .then((user) => {
       if (!user) {
         return res.status(404).json({ error: "User not found" });
@@ -100,6 +102,140 @@ exports.updateBalance = (req, res, next) => {
     })
     .catch((err) => {
       console.error("Error updating balance:", err);
+      next(err);
+    });
+};
+exports.subtractFromBalance = (req, res, next) => {
+  const transactionAmount = parseFloat(req.body.priceOfTransaction); 
+  const nameOfTransaction = req.body.nameOfTransaction;
+
+  if (isNaN(transactionAmount) || transactionAmount <= 0) {
+      req.flash('error', 'Please enter a valid positive number for the transaction amount.');
+      return res.redirect('/users/overview');
+  }
+  const userId = req.session.user;
+  model.findById(userId)
+      .then(user => {
+          if (!user) {
+              return res.status(404).json({ error: 'User not found' });
+          }
+          if (user.balance < transactionAmount) {
+              req.flash('error', 'Insufficient balance for withdrawal.');
+              return res.redirect('/users/overview');
+          }
+          user.balance -= transactionAmount;
+          const newTransaction = {
+              name: nameOfTransaction,
+              price: transactionAmount
+          };
+          user.transactions.push(newTransaction);
+          return user.save();
+      })
+      .then(updatedUser => {
+          console.log('User after balance update:', updatedUser);
+          req.flash('success', 'Transaction completed successfully.');
+          res.redirect('/users/overview');
+      })
+      .catch(err => {
+          console.error('Error updating balance:', err);
+          next(err);
+      });
+};
+
+exports.updateSavings = (req, res, next) => {
+  const savingsAmount = parseFloat(req.body.savings);
+  if (isNaN(savingsAmount) || savingsAmount <= 0) {
+    req.flash("error", "Please enter a valid positive number for savings.");
+    return res.redirect("/users/overview"); 
+  }
+
+  const userId = req.session.user;
+
+  model.findById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const newSavingsTransaction = {
+        name: "Savings",
+        price: savingsAmount,
+        date: new Date()
+      };
+
+      user.savingsTotal += savingsAmount;
+
+      user.totalSavingsAmount += savingsAmount;
+
+      return user.save();
+    })
+    .then((updatedUser) => {
+      console.log("User after savings update:", updatedUser);
+      req.flash("success", "Savings updated successfully.");
+      res.redirect("/users/overview");
+    })
+    .catch((err) => {
+      console.error("Error updating savings:", err);
+      req.flash("error", "An error occurred while updating savings.");
+      next(err);
+    });
+};
+
+exports.savingsTotal = (req, res, next) => {
+  const newAmount = parseFloat(req.body.savingsTotal);
+  if (isNaN(newAmount) || newAmount <= 0) {
+    req.flash("error", "Please enter a valid positive number for the amount.");
+    return res.redirect("/users/overview"); 
+  }
+  const userId = req.session.user;
+
+  model.findById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      user.totalSavingsAmount = newAmount;
+
+      return user.save();
+    })
+    .then((updatedUser) => {
+      console.log("User after savings total update:", updatedUser);
+      req.flash("success", "Savings total updated successfully.");
+      res.redirect("/users/overview");
+    })
+    .catch((err) => {
+      console.error("Error updating savings total:", err);
+      req.flash("error", "An error occurred while updating savings total.");
+      next(err);
+    });
+};
+
+
+
+exports.updateSavingsPutAway = (req, res, next) => {
+  const newAmount = parseFloat(req.body.savingsPutAway);
+  if (isNaN(newAmount) || newAmount <= 0) {
+    req.flash("error", "Please enter a valid positive number for the amount put away.");
+    return res.redirect("/users/overview");
+  }
+  const userId = req.session.user;
+  model.findById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      user.savingsPutAway += newAmount;
+
+      return user.save();
+    })
+    .then((updatedUser) => {
+      console.log("User after savings put away update:", updatedUser);
+      req.flash("success", "Savings put away updated successfully.");
+      res.redirect("/users/overview");
+    })
+    .catch((err) => {
+      console.error("Error updating savings put away:", err);
+      req.flash("error", "An error occurred while updating savings put away.");
       next(err);
     });
 };
