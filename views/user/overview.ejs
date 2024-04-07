@@ -7,6 +7,53 @@
     <title>Express App</title>
 <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        form label {
+            display: block; 
+            margin-bottom: 5px; 
+        }
+
+        form input[type="text"] {
+            display: block;
+            margin-bottom: 10px; 
+        }
+        .header {
+            background-color: #3c81b2; 
+            color: white; 
+            padding: 10px; 
+        }
+        .form-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-container input[type="text"] {
+            margin-right: 10px;
+        }
+
+        .container-2 {
+            width: 100%; 
+            height: 50px; 
+            background-color: red; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .container-3 {
+            width: 100%; 
+            height: 50px; 
+            background-color: green; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -23,10 +70,51 @@
         </div>
     </nav>
     
+<body>
+    <h1 class="header">Welcome to Budget U, <%= user.firstName %>!</h1>
+<!-- change color to fit scheme -->
+   <% if ((errorMessages && errorMessages.length > 0) || (successMessages && successMessages.length > 0)) { %>
+        <div>
+            <% if (errorMessages && errorMessages.length > 0) { %>
+                <div class="container-2">
+                    <% errorMessages.forEach(message => { %>
+                        <%= message %><br>
+                    <% }); %>
+                </div>
+            <% } %>
+            <% if (successMessages && successMessages.length > 0) { %>
+                <div class="container-3">
+                    <% successMessages.forEach(message => { %>
+                        <%= message %><br>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
 
-<div class="container-fluid d-flex justify-content-center">
-    <h1>Welcome, <%= user.firstName + ' ' + user.lastName %>!</h1>
-</div>
+
+    <div class="flex-container">
+        <div style="position: relative; top: 10px;">
+            <form action="/users/overview" method="POST" class="form-container">
+                <label for="paycheck">Paycheck: </label>
+                <br><br>
+                <input type="text" id="paycheck" name="paycheck">
+                <input type="submit" value="Submit" style="color: black; position: relative; bottom: 5px;">
+            </form>
+        </div>
+        <div style="position: relative; left: 150px;">
+            <label for="balance"><strong>Updated Balance: $<%=user.balance%></strong></label>
+        </div>
+        <div>
+            2
+        </div>
+        <div>
+            3
+        </div>
+    </div>
+</body>
+<!--STOP here!-->
+
 
 <!-- Bootstrap JS (optional) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
