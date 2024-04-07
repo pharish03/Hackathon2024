@@ -6,18 +6,21 @@
     <title>Express App</title>
 <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="nav-wrapper">
-            <a href='/'>Home</a>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">BudgetU</a>
+        <div class="navbar-nav">
+            
             <%if(!user) {%>
-                <a href='/users/signup'>Sign Up</a>
-                <a href='/users/login'>Login</a>
+                <a class="nav-link btn-signup" href="/users/signup">Sign Up</a>
+                <a class="nav-link btn-login" href="/users/login">Login</a>
             <%} else {%>
-                <a href='/users/overview'>Profile</a>
-                <a href='/users/logout'>Logout</a> 
+                <a class="nav-link btn-profile" href='/users/overview'>Profile</a>
+                <a class="nav-link btn-logout" href='/users/logout'>Logout</a> 
             <%}%>
         </div>
     </nav>
@@ -26,7 +29,7 @@
 
 
 <div class="container">
-    <h2>Sign Up</h2>
+    <h2>Sign Up For An Account Here!</h2>
     <form action="/users" method="POST" class="user-form">
         <div class="form-group">
         <label for="firstName">First Name</label>
@@ -46,6 +49,27 @@
     </div>
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
+</div>
+
+
+
+
+<div class="footer-index">
+    <div class="flex-container-index">
+        <div class="copyright">
+            <p>© 2024 BudgetU. All rights reserved.</p>
+        </div>
+        <div class="icons">
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-pinterest"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+        <div class="logo">
+            <img src="/images/circle_logo.png" alt="Circle Logo">
+        </div>
+        
+    </div>
 </div>
 
 

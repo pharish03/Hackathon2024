@@ -6,319 +6,13 @@
     <title>Express App</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        html {
-            overflow-y: auto; /* Vertical scrollbar */
-            overflow-x: hidden; /* Hide horizontal scrollbar */
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar {
-            background-color: #05386B;
-            height: 80px;
-            box-shadow: 0 4px 6px -6px black;
-        }
-
-        .navbar-brand {
-            color: #fff;
-            font-family: Courier New, monospace;
-            font-size: 1.8rem; /* Adjust font size */
-        }
-
-        .navbar-nav {
-            margin-left: auto;
-        }
-
-        .nav-link {
-            color: #fff;
-            font-weight: bold;
-            margin-left: 20px;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover {
-            color: #3A86FF;
-        }
-
-        .btn-signup {
-            background-color: #3A86FF;
-            border-color: #3A86FF;
-            font-weight: bold;
-            height: 50px; /* Adjust height */
-            border-radius: 4px; /* Adjust border radius */
-            padding: 10px 20px; /* Adjust padding */
-        }
-
-        .btn-signup:hover {
-            background-color: #539DC2;
-            border-color: #539DC2;
-        }
-
-        .btn-login {
-            background-color: #fff;
-            border-color: #fff;
-            color: #05386B;
-            font-weight: bold;
-            height: 50px; /* Adjust height */
-            border-radius: 4px; /* Adjust border radius */
-            padding: 10px 20px; /* Adjust padding */
-        }
-
-        .btn-login:hover {
-            background-color: #f0f0f0;
-            border-color: #f0f0f0;
-            color: #05386B;
-        }
-
-        .btn-profile {
-            background-color: #3A86FF;
-            border-color: #3A86FF;
-            font-weight: bold;
-            height: 50px; /* Adjust height */
-            border-radius: 4px; /* Adjust border radius */
-            padding: 10px 20px; /* Adjust padding */
-        }
-
-        .btn-profile:hover {
-            background-color: #539DC2;
-            border-color: #539DC2;
-        }
-
-        .btn-logout {
-            background-color: #fff;
-            border-color: #fff;
-            color: #05386B;
-            font-weight: bold;
-            height: 50px; /* Adjust height */
-            border-radius: 4px; /* Adjust border radius */
-            padding: 10px 20px; /* Adjust padding */
-        }
-
-        .btn-logout:hover {
-            background-color: #f0f0f0;
-            border-color: #f0f0f0;
-            color: #05386B;
-        }
-
-        /* Custom styles for popup */
-        .popup-container {
-            position: relative;
-            left: 450px;
-            z-index: 1;
-            display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-        }
-
-        .popup {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-size: 45px; /* Adjust font size */
-            font-family: Courier New, monospace; /* Change font */
-            text-align: left; /* Align to far left */
-            font-weight: bold; /* Change font weight */
-        }
-
-        h2 {
-            font-size: 45px; /* Adjust font size */
-            font-family: Courier New, monospace; /* Change font */
-            text-align: left; /* Align to far left */
-            margin-top: 20px; /* Adjust top margin */
-            margin-left: 20px; /* Adjust left margin */
-            overflow: hidden; /* Hide overflow */
-            white-space: nowrap; /* Prevent line break */
-            font-weight: bold; /* Change font weight */
-        }
-    
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 100px; /* Adjust height as needed */
-            margin-top: 20px; /* Adjust margin top */
-            overflow: hidden;
-        }
-        
-        .space-above-grid {
-            margin-top: 65px; /* Add margin-top to create space */
-        }
-
-        .rectangle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #bad9f5; /* Set to the background color of the triangles */
-        }
-
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            position: absolute;
-        }
-
-        .triangle-1 {
-            top: 0;
-            left: 0;
-            border-bottom: 100px solid #FF5733; /* Change color as needed */
-        }
-
-        .triangle-2 {
-            top: 0;
-            left: 50px;
-            border-bottom: 100px solid #FFC300; /* Change color as needed */
-        }
-
-        .triangle-3 {
-            top: 0;
-            left: 100px;
-            border-bottom: 100px solid #DAF7A6; /* Change color as needed */
-        }
-
-        .triangle-4 {
-            top: 0;
-            left: 150px;
-            border-bottom: 100px solid #C70039;
-        }
-
-        .triangle-5 {
-            top: 0;
-            left: 200px;
-            border-bottom: 100px solid #900C3F;
-        }
-
-        .triangle-6 {
-            top: 0;
-            left: 250px;
-            border-bottom: 100px solid #581845;
-        }
-
-        .triangle-7 {
-            top: 0;
-            left: 300px;
-            border-bottom: 100px solid #FF5733;
-        }
-
-        .triangle-8 {
-            top: 0;
-            left: 350px;
-            border-bottom: 100px solid #FFC300;
-        }
-
-        .triangle-9 {
-            top: 0;
-            right: 100px;
-            border-bottom: 100px solid #DAF7A6;
-        }
-
-        .triangle-10 {
-            top: 0;
-            right: 50px;
-            border-bottom: 100px solid #C70039;
-        }
-
-        .triangle-11 {
-            top: 0;
-            right: 0;
-            border-bottom: 100px solid #900C3F;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust as needed */
-            gap: 20px;
-        }
-
-        .grid-item {
-            display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            background-color: #f0f0f0; /* Set background color */
-            padding: 20px; /* Add padding for spacing */
-        }
-
-        /* Typing cursor */
-        .typing-cursor {
-            display: inline-block;
-            width: 0.1em;
-            height: 1.2em;
-            background-color: black;
-            animation: blink 0.4s infinite;
-        }
-
-        @keyframes blink {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        footer {
-            background-color: #05386B;
-            color: #fff;
-            padding: 20px 0;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .contact-info, .social-media {
-            margin-top: 20px;
-        }
-
-        .contact-info p, .social-media p {
-            margin: 0;
-        }
-
-        .social-media ul {
-            padding: 0;
-        }
-
-        .social-media ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="#">BudgetU</a>
+    <a class="navbar-brand" href="/">BudgetU</a>
     <div class="navbar-nav">
         
         <%if(!user) {%>
@@ -331,7 +25,7 @@
     </div>
 </nav>
 
-<% if (!user) { %>
+<!-- <% if (!user) { %>
     <div class="container mt-5">
         <div class="popup-container">
             <div class="popup">
@@ -343,71 +37,77 @@
             </div>
         </div>
     </div>
-<% } %>
+<% } %> -->
 
 <div>
-    <h1 class="mt-3" style="position: relative; left: 200px;">Make smarter financial decisions with BudgetU's</h1>
-    <h2 id="dynamicText" class="mt-3" style="position: relative; left: 180px;"></h2>
-    <div class="banner">
-        <div class="rectangle"></div>
-        <div class="triangle triangle-1"></div>
-        <div class="triangle triangle-2"></div>
-        <div class="triangle triangle-3"></div>
-        <div class="triangle triangle-4"></div>
-        <div class="triangle triangle-5"></div>
-        <div class="triangle triangle-6"></div>
-        <div class="triangle triangle-7"></div>
-        <div class="triangle triangle-8"></div>
-        <div class="triangle triangle-9"></div>
-        <div class="triangle triangle-10"></div>
-        <div class="triangle triangle-11"></div>
+    <div class="opening">
+        <br><br>
+        <h1>Make smarter financial decisions with BudgetU's</h1>
+        <h2 id="dynamicText"></h2>
     </div>
 
-    <div class="container">
-        <h2>Welcome to BudgetU</h2>
-        <p>Start taking control of your finances with BudgetU. Our platform offers powerful tools and insights to help you manage your money effectively.</p>
-        <p>With BudgetU, you can track your spending, set savings goals, and gain valuable insights into your financial habits. Whether you're saving for a big purchase, paying off debt, or planning for the future, BudgetU has you covered.</p>
+    <div class="flex-container">
+        <div class="flex-item1">
+            <br><br><br>
+            <h2>Welcome to BudgetU</h2>
+            <p>Start taking control of your finances with BudgetU. Our platform offers powerful tools and insights to help you manage your money effectively.</p>
+            <p>With BudgetU, you can track your spending, set savings goals, and gain valuable insights into your financial habits. Whether you're saving for a big purchase, paying off debt, or planning for the future, BudgetU has you covered.</p>
+        </div>
+        <div class="flex-item2">
+            <img src="/images/logo2.png" alt="BudgetU Logo">
+        </div>
     </div>
 
-    <div class="space-above-grid">
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="/images/hackathon.png">
+
+    <div class="flex-container2">
+        <img src="/images/hackathon.png" alt="Hackathon Image">
+        <img src="/images/hack2.jpg" alt="Hackathon Image 2">
+        <div class="text-container">
+            <h3>Budget Plans 4 U</h3>
+            <p>The <strong>20-30-50</strong> budget split is a widely recognized budgeting guideline that suggests allocating your income into three main categories: 20% for savings, 30% for discretionary spending, 
+                    and 50% for essentials. Here's why this budget split can be argued to be effective:</p>
+            <p>(1) Savings (20%):</p>
+            <ul>
+                <li>Saving a significant portion of your income is crucial for building an emergency fund, saving for retirement, and achieving long-term financial goals.</li>
+                <li>Allocating 20% of your income to savings ensures that you prioritize your future financial security and have a safety net for unexpected expenses.</li>
+            </ul>
+            <p>(2) Discrentionary Spending (30%):</p>
+            <ul>
+                <li>Discretionary spending encompasses non-essential expenses such as entertainment, dining out, travel, hobbies, and other lifestyle choices.</li>
+                <li>Allocating 30% of your income to discretionary spending allows for flexibility and enjoyment without sacrificing your financial stability or long-term goals.</li>
+            </ul>
+            <p>Essentials (50%):</p>
+            <ul>
+                <li>Essentials include necessary expenses such as housing, utilities, groceries, transportation, healthcare, and insurance.</li>
+                <li>Allocating 50% of your income to essentials ensures that you cover your basic needs and maintain a comfortable standard of living.</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="footer-index">
+        <div class="flex-container-index">
+            <div class="copyright">
+                <p>© 2024 BudgetU. All rights reserved.</p>
             </div>
-            <div class="grid-item">
-                <img src="/images/hack2.jpg">
+            <div class="icons">
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-pinterest"></i>
+                <i class="fa-brands fa-linkedin"></i>
             </div>
-        </div>      
+            <div class="logo">
+                <img src="/images/circle_logo.png" alt="Circle Logo">
+            </div>
+            
+        </div>
     </div>
 
-    <p> </p>
-    <p>The 20-30-50 budget split is a widely recognized budgeting guideline that suggests allocating your income into three main categories: 20% for savings, 30% for discretionary spending, and 50% for essentials. Here's why this budget split can be argued to be effective:</p>
-    <p>1.</p>
-    <p>Savings (20%):</p>
-    <p> - Saving a significant portion of your income is crucial for building an emergency fund, saving for retirement, and achieving long-term financial goals.</p>
-    <p> - Allocating 20% of your income to savings ensures that you prioritize your future financial security and have a safety net for unexpected expenses.</p>
-    <p> - This category can include contributions to retirement accounts, savings accounts, investment accounts, or other long-term savings goals.</p>
-    <p>2.</p>
-    <p>Discretionary Spending (30%):</p>
-    <p> - Discretionary spending encompasses non-essential expenses such as entertainment, dining out, travel, hobbies, and other lifestyle choices.</p>
-    <p> - Allocating 30% of your income to discretionary spending allows for flexibility and enjoyment without sacrificing your financial stability or long-term goals.</p>
-    <p> - This category gives you the freedom to spend on things that bring you joy and enrich your life while still being mindful of your overall budget.</p>
-    <p>3.</p>
-    <p>Essentials (50%):</p>
-    <p> - Essentials include necessary expenses such as housing, utilities, groceries, transportation, healthcare, and insurance.</p>
-    <p> - Allocating 50% of your income to essentials ensures that you cover your basic needs and maintain a comfortable standard of living.</p>
-    <p> - This category provides a clear framework for managing essential expenses and helps ensure that you allocate a reasonable portion of your income to necessities.</p>
-    <p> __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</p>
-    <p>Using the 20-30-50 budget split effectively involves the following steps:</p>
-    <p> - Calculate Your Income: Determine your total monthly income from all sources.</p>
-    <p> - Track Your Expenses: Make a list of all your expenses and categorize them as savings, discretionary spending, or essentials.</p>
-    <p> - Allocate Your Income: Based on the 20-30-50 guideline, allocate your income into these three categories. Adjust the amounts as needed to fit your individual circumstances and financial goals.</p>
-    <p> - Monitor Your Budget: Regularly track your spending and compare it to your budgeted amounts. Make adjustments as necessary to ensure that you stay within your budget and meet your financial objectives.</p>
-    <p> - Prioritize Your Savings: Make saving a priority by automatically transferring funds to your savings accounts each month. Consider setting up automatic transfers to ensure consistency and discipline in your savings efforts.</p>
-    <p> - Be Flexible: While the 20-30-50 budget split provides a useful framework, it's essential to remain flexible and adapt your budget as your financial situation changes. Life events, unexpected expenses, or changes in income may require adjustments to your budget allocation.</p>
-    <p> __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ </p>
-    <p>Overall, the 20-30-50 budget split offers a balanced approach to managing your finances, prioritizing savings, allowing for discretionary spending, and covering essential expenses. By following this guideline and adjusting it to suit your needs, you can achieve greater financial stability and work towards your long-term financial goals. </p>
-    <footer>
+
+
+
+    <!-- <footer>
         <div class="container">
             <p>&copy; 2024 Your Company Name. All rights reserved.</p>
             <ul>
@@ -432,8 +132,8 @@
                 </ul>
             </div>
         </div>
-    </footer>
-      
+    </footer> -->
+
 </div>
 
 
