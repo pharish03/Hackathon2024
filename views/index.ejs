@@ -4,31 +4,224 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Express App</title>
-<!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html {
+            overflow-y: auto; /* Vertical scrollbar */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+        
+        .navbar {
+            background-color: #05386B;
+            height: 80px;
+            box-shadow: 0 4px 6px -6px black;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-family: Courier New, monospace;
+            font-size: 1.8rem; /* Adjust font size */
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .nav-link {
+            color: #fff;
+            font-weight: bold;
+            margin-left: 20px;
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover {
+            color: #3A86FF;
+        }
+
+        .btn-primary {
+            background-color: #3A86FF;
+            border-color: #3A86FF;
+            font-weight: bold;
+            height: 50px; /* Adjust height */
+            border-radius: 4px; /* Adjust border radius */
+            padding: 10px 20px; /* Adjust padding */
+        }
+
+        .btn-primary:hover {
+            background-color: #539DC2;
+            border-color: #539DC2;
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            border-color: #fff;
+            color: #05386B;
+            font-weight: bold;
+            height: 50px; /* Adjust height */
+            border-radius: 4px; /* Adjust border radius */
+            padding: 10px 20px; /* Adjust padding */
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+            border-color: #f0f0f0;
+            color: #05386B;
+        }
+
+        /* Custom styles for popup */
+        .popup-container {
+            position: relative;
+            margin-bottom: 20px; /* Adjust margin bottom to move above the title */
+            z-index: 1; /* Ensure it appears above the content */
+        }
+
+        .popup {
+            position: absolute;
+            top: -50px; /* Adjust top position */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8d7da; /* Adjust background color */
+            color: #721c24; /* Adjust text color */
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 45px; /* Adjust font size */
+            font-family: Courier New, monospace; /* Change font */
+            text-align: left; /* Align to far left */
+            font-weight: bold; /* Change font weight */
+        }
+
+        h2 {
+            font-size: 45px; /* Adjust font size */
+            font-family: Courier New, monospace; /* Change font */
+            text-align: left; /* Align to far left */
+            margin-top: 20px; /* Adjust top margin */
+            margin-left: 20px; /* Adjust left margin */
+            overflow: hidden; /* Hide overflow */
+            white-space: nowrap; /* Prevent line break */
+            font-weight: bold; /* Change font weight */
+        }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 0.1em;
+            height: 1.2em;
+            background-color: black;
+            animation: blink 0.4s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="nav-wrapper">
-        <a href='/'>Home</a>
-        <%if(!user) {%>
-            <a href='/users/signup'>Sign Up</a>
-            <a href='/users/login'>Login</a>
-        <%} else {%>
-            <a href='/users/overview'>Profile</a>
-            <a href='/users/logout'>Logout</a> 
-        <%}%>
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">BudgetU</a>
+    <div class="navbar-nav">
+        <a class="nav-link btn-primary" href="/users/signup">Sign Up</a>
+        <a class="nav-link btn-secondary" href="/users/login">Login</a>
     </div>
 </nav>
 
 <div class="container mt-5">
-    <h1>Hello World</h1>
+    <div class="popup-container">
+        <div class="popup">
+            New to BudgetU? Click <a href="/users/signup">here</a> to sign up.
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
 </div>
+
+<div>
+    <h1 class="mt-3" style="position: relative; left: 20px;">Make smarter financial decisions with BudgetU's</h1>
+    <h2 id="dynamicText" class="mt-3"></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel turpis vitae arcu varius condimentum et sit amet massa. Nulla facilisi. Integer ut libero at ipsum placerat cursus. Donec in consequat mauris, vitae luctus felis.</p>
+ 
+</div>
+
 
 <!-- Bootstrap JS (optional) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Script to close popup -->
+<script>
+    $(document).ready(function(){
+        $('.close').click(function(){
+            $('.popup').hide();
+        });
+    });
+
+    // JavaScript to simulate typing and deleting characters
+    var texts = ["easy to use budget tracker", "progressive tracking with data", "unique financing experience"];
+    var counter = 0;
+    var index = 0;
+    var isDeleting = false;
+
+    function type() {
+        var currentText = texts[counter];
+        if (isDeleting) {
+            document.getElementById("dynamicText").innerHTML = currentText.substring(0, index) + '<span class="typing-cursor"></span>';
+            index--;
+        } else {
+            document.getElementById("dynamicText").innerHTML = currentText.substring(0, index + 1) + '<span class="typing-cursor"></span>';
+            index++;
+        }
+
+        if (!isDeleting && index === currentText.length) {
+            isDeleting = true;
+            setTimeout(type, 200);
+        } else if (isDeleting && index === 0) {
+            isDeleting = false;
+            counter++;
+            if (counter === texts.length) {
+                counter = 0;
+            }
+            setTimeout(type, 500);
+        } else {
+            setTimeout(type, 100);
+        }
+    }
+
+    type();
+</script>
+
 </body>
 </html>
