@@ -26,6 +26,24 @@
         </div>
     </nav>
     
+    <% if ((errorMessages && errorMessages.length > 0) || (successMessages && successMessages.length > 0)) { %>
+        <div>
+            <% if (errorMessages && errorMessages.length > 0) { %>
+                <div class="container-2">
+                    <% errorMessages.forEach(message => { %>
+                        <%= message %><br>
+                    <% }); %>
+                </div>
+            <% } %>
+            <% if (successMessages && successMessages.length > 0) { %>
+                <div class="container-3">
+                    <% successMessages.forEach(message => { %>
+                        <%= message %><br>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
 
 
 
